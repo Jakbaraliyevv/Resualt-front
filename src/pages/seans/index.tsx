@@ -1,5 +1,11 @@
+import SeansComponents from "../../components/seans";
+
 function Seans() {
-  return <div>Seans</div>;
+  return (
+    <div>
+      <SeansComponents />
+    </div>
+  );
 }
 
 export default Seans;

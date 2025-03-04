@@ -1,5 +1,11 @@
+import AfishaComponents from "../../components/afisha";
+
 function Afisha() {
-  return <div>Afisha</div>;
+  return (
+    <div>
+      <AfishaComponents />
+    </div>
+  );
 }
 
 export default Afisha;

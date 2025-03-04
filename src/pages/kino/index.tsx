@@ -1,5 +1,11 @@
+import KinoComponents from "../../components/kino";
+
 function Kino() {
-  return <div>Kino</div>;
+  return (
+    <div>
+      <KinoComponents />
+    </div>
+  );
 }
 
 export default Kino;

@@ -1,5 +1,11 @@
+import TeaterComponents from "../../components/teater";
+
 function Teater() {
-  return <div>Teater</div>;
+  return (
+    <div>
+      <TeaterComponents />
+    </div>
+  );
 }
 
 export default Teater;
