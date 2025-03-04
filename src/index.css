@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-pagination-bullet {
+  width: 13px !important; /* Standart 8px bo‘ladi, biz 12px qildik */
+  height: 14px !important; /* Barcha nuqtalarni kattalashtirish */
+  background-color: #FFF !important; /* Rangi ko‘k bo‘lishi uchun */
+  opacity: 0.7 !important; /* Biroz shaffoflik */
+}
+
+.swiper-pagination-bullet-active {
+  width: 13px !important; /* Faol tugma kattaroq bo‘lishi uchun */
+  height: 13px !important;
+  background-color: #fff !important; /* Faol tugma qizil rangda bo‘lishi */
+}
+
+/* Ikki yoni uchun */
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 50px !important;
+  height: 50px !important;
+  background-color: rgb(156, 166, 166) !important;
+  border-radius: 50%; /* Dumaloq qilish */
+  color: rgba(0, 0, 0, 0.6) !important; /* Oq rangli o‘qlar */
+  font-size: 19px !important;
+}
+
+/* O‘ng tugmani sal ichkariga surish */
+.swiper-button-next {
+  right: 15px !important;
+}
+
+/* Chap tugmani sal ichkariga surish */
+.swiper-button-prev {
+  left: 15px !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 19px !important; /* O‘q belgilarini kattalashtirish */
+}
