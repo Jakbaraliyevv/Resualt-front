@@ -1,23 +1,82 @@
 import { useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAxios } from "../../../hooks/axios";
+import notificationApi from "../../../generic/notificition";
+import { RegisterTYpe } from "../../../types";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const labelStyle = "text-[17px] font-medium text-[#00bfa5]";
-  // Start Register
+ 
 
+  // Start Register
   const [name, setName] = useState("");
   const [surName, setSurName] = useState("");
   const [email, setEmail] = useState("");
-  const [number, setNumbur] = useState("");
   const [password, setPassword] = useState("");
-  // const validateEmail = (email: string) => {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   return emailRegex.test(email);
-  // };
+  const [loading, setLoading] = useState(false);
+  const axios = useAxios();
+  const notify = notificationApi();
+  const navigate = useNavigate();
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+ 
+
+  const getUserData = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const data: RegisterTYpe = {
+      first_name: name,
+      last_name: surName,
+      email: email,
+      password: password,
+    };
+
+    console.log(data, "data");
+    if (!name || !surName || !email || !password) {
+      notify({ type: "full" });
+      return;
+    }
+    if (!validateEmail(email)) {
+      notify({ type: "forma" });
+      return;
+    }
+    if (password.length < 6) {
+      notify({ type: "passwordWrong" });
+      return;
+    }
+    setLoading(true);
+
+    axios({
+      method: "POST",
+      url: "/auth/sign-up",
+      data: data,
+    })
+      .then((data) => {
+        console.log(data, "data29");
+        notify({ type: "register" });
+        setName("");
+        setSurName("");
+        setEmail("");
+        setPassword("");
+        console.log("Inputlar tozalandi!");
+        navigate("/verify");
+      })
+      .catch((error) => {
+        console.log(error.response ? error.response.data : error, "catch");
+        notify({ type: "registerError" });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <section className="w-full">
@@ -52,16 +111,7 @@ function Register() {
             placeholder="Inter your email"
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <label className={labelStyle}>Phone number</label>
-          <input
-            value={number}
-            onChange={(e) => setNumbur(e.target.value)}
-            className="w-full text-[14px] border-[2px] border-[#00bfa5] rounded-[6px] outline-none p-1"
-            type=""
-            placeholder="Inter your phone"
-          />
-        </div>
+
         <div className="flex flex-col gap-1">
           <label className={labelStyle}>Password</label>
           <div className="relative">
@@ -85,6 +135,7 @@ function Register() {
         </div>
 
         <button
+          onClick={(e) => getUserData(e)}
           disabled={loading}
           className={`w-full bg-[#00bfa5] text-[#FFF] p-1.5 rounded-[6px] mt-4 transition-all duration-300 ${
             loading
