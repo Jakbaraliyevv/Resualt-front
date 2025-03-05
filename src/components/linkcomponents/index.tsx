@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function LinksComponents() {
+  const navigate = useNavigate();
   return (
     <section className="bg-[#FFF] py-4 shadow-[0px_5px_15px_rgba(0,0,0,0.1)]">
       <div className="w-[90%] m-auto flex items-center gap-9">
@@ -14,10 +15,9 @@ function LinksComponents() {
         >
           Афиша
           <span
-            className={`absolute left-1/2 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
-            group-hover:w-full group-hover:left-0 
-            ${window.location.pathname === "/" ? "w-full left-0" : ""}
-            `}
+            className={`absolute left-0 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
+            group-hover:w-full 
+            ${window.location.pathname === "/" ? "w-full" : ""}`}
           ></span>
         </NavLink>
 
@@ -31,10 +31,9 @@ function LinksComponents() {
         >
           Сеансы
           <span
-            className={`absolute left-1/2 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
-            group-hover:w-full group-hover:left-0 
-            ${window.location.pathname === "/seans" ? "w-full left-0" : ""}
-            `}
+            className={`absolute left-0 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
+            group-hover:w-full 
+            ${window.location.pathname === "/seans" ? "w-full" : ""}`}
           ></span>
         </NavLink>
 
@@ -48,10 +47,9 @@ function LinksComponents() {
         >
           Скоро в кино
           <span
-            className={`absolute left-1/2 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
-            group-hover:w-full group-hover:left-0 
-            ${window.location.pathname === "/kino" ? "w-full left-0" : ""}
-            `}
+            className={`absolute left-0 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
+            group-hover:w-full 
+            ${window.location.pathname === "/kino" ? "w-full" : ""}`}
           ></span>
         </NavLink>
 
@@ -65,10 +63,9 @@ function LinksComponents() {
         >
           Кинотеатр
           <span
-            className={`absolute left-1/2 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
-            group-hover:w-full group-hover:left-0 
-            ${window.location.pathname === "/teater" ? "w-full left-0" : ""}
-            `}
+            className={`absolute left-0 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
+            group-hover:w-full 
+            ${window.location.pathname === "/teater" ? "w-full" : ""}`}
           ></span>
         </NavLink>
 
@@ -82,15 +79,17 @@ function LinksComponents() {
         >
           Контакты
           <span
-            className={`absolute left-1/2 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
-            group-hover:w-full group-hover:left-0 
-            ${window.location.pathname === "/contact" ? "w-full left-0" : ""}
-            `}
+            className={`absolute left-0 bottom-[-2px] h-[2px] bg-[#00bfa5] w-0 transition-all duration-300 
+            group-hover:w-full 
+            ${window.location.pathname === "/contact" ? "w-full" : ""}`}
           ></span>
         </NavLink>
 
         <div className="flex items-center gap-4">
-          <button className="w-[110px] h-[29px] bg-[#00bfa5] rounded-[40px] text-[#FFF] text-[13px]">
+          <button
+            onClick={() => navigate("/auth")}
+            className="w-[110px] h-[29px] bg-[#00bfa5] rounded-[40px] text-[#FFF] text-[13px]"
+          >
             Войти
           </button>
           <button className="w-[160px] h-[34px] bg-[#00bfa5] rounded-[40px] text-[#FFF] text-[15px]">

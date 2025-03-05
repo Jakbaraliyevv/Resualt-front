@@ -5,6 +5,8 @@ import Seans from "../pages/seans";
 import Teater from "../pages/teater";
 import Kino from "../pages/kino";
 import Contact from "../pages/contact";
+import AuthComponents from "../components/auth";
+import Verify from "../components/auth/verify";
 
 export const root = createBrowserRouter([
   {
@@ -33,4 +35,6 @@ export const root = createBrowserRouter([
       },
     ],
   },
+  { path: "/auth", element: <AuthComponents /> },
+  { path: "/verify", element: <Verify /> },
 ]);
