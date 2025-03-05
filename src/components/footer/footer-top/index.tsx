@@ -12,11 +12,28 @@ function FooterTop() {
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <Link to={""}>
-            <img src={appstore} alt="" />
+          <Link
+            to="#"
+            onClick={() =>
+              window.open(
+                "https://play.google.com/store/apps/details?id=ru.kinoplan.cinema.magiccinematashkent",
+                "_blank"
+              )
+            }
+          >
+            <img className="" src={appstore} alt="" />
           </Link>
-          <Link to={""}>
-            <img src={google} alt="" />
+
+          <Link
+            to="#"
+            onClick={() =>
+              window.open(
+                "https://apps.apple.com/uz/app/magic-cinema/id1644088586",
+                "_blank"
+              )
+            }
+          >
+            <img className="" src={google} alt="" />
           </Link>
         </div>
       </div>

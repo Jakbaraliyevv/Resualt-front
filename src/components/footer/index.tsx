@@ -11,19 +11,19 @@ function Footer() {
           <div className="flex items-start justify-between w-[35%]">
             <div className="flex flex-col gap-4">
               <h2 className="text-[19px] text-[#FFF] font-medium">Меню</h2>
-              <a className="text-[17px] text-[#009c86]" href="#">
+              <a className="text-[17px] text-[#009c86]" href="/">
                 Афиша
               </a>
-              <a className="text-[17px] text-[#009c86]" href="#">
+              <a className="text-[17px] text-[#009c86]" href="seans">
                 Сеансы
               </a>
-              <a className="text-[17px] text-[#009c86]" href="#">
+              <a className="text-[17px] text-[#009c86]" href="kino">
                 Скоро в кино
               </a>
-              <a className="text-[17px] text-[#009c86]" href="#">
+              <a className="text-[17px] text-[#009c86]" href="teater">
                 Кинотеатр
               </a>
-              <a className="text-[17px] text-[#009c86]" href="#">
+              <a className="text-[17px] text-[#009c86]" href="contact">
                 Контакты
               </a>
             </div>
@@ -56,7 +56,14 @@ function Footer() {
           <div className="flex flex-col gap-4 pr-[117px]">
             <div className="flex flex-col gap-2">
               <h2 className="text-[19px] text-[#FFF] font-medium">Ташкент</h2>
-              <p className="text-[17px] text-[#009c86]">ул. Бабура, 174</p>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://yandex.uz/maps/10335/tashkent/?feedback=object%2Fadd&feedback-context=map.controls&ll=69.254985%2C41.303246&z=14.05"
+                className="text-[17px] text-[#009c86]"
+              >
+                ул. Бабура, 174
+              </a>
             </div>
             <div className="flex flex-col gap-1">
               <h3 className="text-[17px] text-[#FFF] font-medium">Контакты</h3>
@@ -79,9 +86,12 @@ function Footer() {
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1">
-              <p className="text-[17px] text-[#fff]">© 2025. Все права защищены</p>
               <p className="text-[17px] text-[#fff]">
-                Разработано в <span className="text-[17px] text-[#009c86]">Киноплане</span>
+                © 2025. Все права защищены
+              </p>
+              <p className="text-[17px] text-[#fff]">
+                Разработано в{" "}
+                <span className="text-[17px] text-[#009c86]">Киноплане</span>
               </p>
             </div>
             <div className="w-[70%]">
