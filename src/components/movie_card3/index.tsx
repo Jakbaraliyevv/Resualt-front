@@ -48,17 +48,17 @@ function MovieCard3() {
               alt={value.title}
             />
           </div>
-          <h2>{value.title}</h2>
+          <h2 className="text-[19px] font-bold text-[#000]">{value.title}</h2>
           <div className="flex items-center gap-4">
-            <button className="bg-[#f2f2f5] w-[36px] h-[28px] rounded-md text-[12px] text-[#727276]">
+            <button className="bg-[#bfbfbf]  w-[36px] h-[28px] rounded-md text-[14px] text-[#000]">
               {value.ageRestriction}+
             </button>
-            <button className="w-[55px] h-[28px] bg-[#f2f2f5] rounded-md text-[12px] text-[#727276]">
+            <button className="w-[55px] h-[28px] bg-[#bfbfc3] rounded-md text-[14px] text-[#000]">
               {value.genre}
             </button>
           </div>
           <div className="flex flex-col gap-2">
-            <h2>{value?.availableDate}</h2>
+            <h2 className="text-[19px] font-medium">{value?.availableDate}</h2>
           </div>
         </div>
       ))}

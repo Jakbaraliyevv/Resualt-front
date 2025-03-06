@@ -3,7 +3,7 @@ import Segodnaya from "./afishaMovie/segodnaya";
 import Zavtra from "./afishaMovie/zavtra";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import MovieCard1 from "../movie_cards1";
+import MovieCard3 from "../movie_card3";
 
 function AfishaComponents() {
   const [activeButton, setActiveButton] = useState("Сегодня");
@@ -54,7 +54,7 @@ function AfishaComponents() {
             </Link>
           </div>
           <div className="mt-7">
-            <MovieCard1 />
+            <MovieCard3 />
           </div>
         </div>
       </div>

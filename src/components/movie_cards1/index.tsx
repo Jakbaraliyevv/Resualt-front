@@ -14,7 +14,15 @@
 //     })
 //       .then((response) => {
 //         if (Array.isArray(response.data)) {
-//           setData(response.data);
+//           // Bugungi sanani olish
+//           const today = new Date().toISOString().split("T")[0];
+
+//           // Faqat bugungi va oldingi sanalar qoladi
+//           const filteredData = response.data.filter(
+//             (movie) => movie.availableDate <= today
+//           );
+
+//           setData(filteredData);
 //         } else {
 //           console.error("API noto‘g‘ri ma’lumot qaytardi:", response.data);
 //         }
@@ -24,7 +32,6 @@
 //       });
 //   }, []);
 
-//   console.log(data);
 //   return (
 //     <section className="grid grid-cols-4 gap-4 p-4">
 //       {data.map((value) => (
@@ -33,7 +40,11 @@
 //           className="flex flex-col gap-4 w-[265px] h-[570px]"
 //         >
 //           <div>
-//             <img className="rounded-xl h-[420px]" src={value.image} alt="" />
+//             <img
+//               className="rounded-xl h-[420px]"
+//               src={value.image}
+//               alt={value.title}
+//             />
 //           </div>
 //           <h2>{value.title}</h2>
 //           <div className="flex items-center gap-4">
@@ -44,8 +55,8 @@
 //               {value.genre}
 //             </button>
 //           </div>
-//           <div className="">
-//             <div className="w-[170px] h-[70px] rounded-md flex items-center  border-[2px] border-[#00bfa5]">
+//           <div>
+//             <div className="w-[170px] h-[70px] rounded-md flex items-center border-[2px] border-[#00bfa5]">
 //               <div className="flex flex-col gap-1 w-full h-full items-center">
 //                 <button className="bg-[#00bfa5] w-full h-[50%] rounded-tl-sm text-[#FFF] text-[19px] font-medium">
 //                   {value.availableTime}
@@ -57,12 +68,12 @@
 //                 </div>
 //               </div>
 
-//               <button className="border-l-[2px] px-3 h-full border-[#00bfa5] flex flex-col  items-center justify-center">
-//                 <img className="w-[19px]" src={karona} alt="" />
+//               <button className="border-l-[2px] px-3 h-full border-[#00bfa5] flex flex-col items-center justify-center">
+//                 <img className="w-[19px]" src={karona} alt="VIP" />
 //                 <p className="text-[14px]">VIP</p>
 //               </button>
 //             </div>
-//             <p className="pl-4  text-[14px]">Зал №3 - Премьер</p>
+//             <p className="pl-4 text-[14px]">Зал №3 - Премьер</p>
 //           </div>
 //         </div>
 //       ))}
@@ -80,6 +91,8 @@ import { Movie } from "../../types";
 function MovieCard1() {
   const axios = useAxios();
   const [data, setData] = useState<Movie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     axios({
@@ -88,14 +101,10 @@ function MovieCard1() {
     })
       .then((response) => {
         if (Array.isArray(response.data)) {
-          // Bugungi sanani olish
           const today = new Date().toISOString().split("T")[0];
-
-          // Faqat bugungi va oldingi sanalar qoladi
           const filteredData = response.data.filter(
             (movie) => movie.availableDate <= today
           );
-
           setData(filteredData);
         } else {
           console.error("API noto‘g‘ri ma’lumot qaytardi:", response.data);
@@ -105,6 +114,38 @@ function MovieCard1() {
         console.error("Error fetching movies:", error);
       });
   }, []);
+
+  const handleBuyTicket = (movie: Movie) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Iltimos, ro‘yxatdan o‘ting!");
+      return;
+    }
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
+
+  const confirmPurchase = () => {
+    if (selectedMovie) {
+      axios({
+        method: "POST",
+        url: `/movie/ticket/${selectedMovie._id}`,
+      })
+        .then(() => {
+          setData((prevData) =>
+            prevData.map((movie) =>
+              movie._id === selectedMovie._id
+                ? { ...movie, count: movie.count - 1 }
+                : movie
+            )
+          );
+          setShowModal(false);
+        })
+        .catch((error) => {
+          console.error("Bilet sotib olishda xatolik:", error);
+        });
+    }
+  };
 
   return (
     <section className="grid grid-cols-4 gap-4 p-4">
@@ -132,16 +173,21 @@ function MovieCard1() {
           <div>
             <div className="w-[170px] h-[70px] rounded-md flex items-center border-[2px] border-[#00bfa5]">
               <div className="flex flex-col gap-1 w-full h-full items-center">
-                <button className="bg-[#00bfa5] w-full h-[50%] rounded-tl-sm text-[#FFF] text-[19px] font-medium">
-                  {value.availableTime}
-                </button>
-
+                {value.count > 0 ? (
+                  <button
+                    onClick={() => handleBuyTicket(value)}
+                    className="bg-[#00bfa5] w-full h-[50%] rounded-tl-sm text-[#FFF] text-[19px] font-medium"
+                  >
+                    {value.availableTime}
+                  </button>
+                ) : (
+                  <p className="text-red-500 font-bold">Bilet tugadi</p>
+                )}
                 <div className="flex items-center gap-2 text-[#4c4c4f] text-[15px]">
                   <p>{value.format}</p>
                   <p>от {value.price} сум</p>
                 </div>
               </div>
-
               <button className="border-l-[2px] px-3 h-full border-[#00bfa5] flex flex-col items-center justify-center">
                 <img className="w-[19px]" src={karona} alt="VIP" />
                 <p className="text-[14px]">VIP</p>
@@ -151,6 +197,27 @@ function MovieCard1() {
           </div>
         </div>
       ))}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg">
+            <h2>Bilet sotib olasizmi?</h2>
+            <div className="flex gap-4 mt-4">
+              <button
+                className="bg-green-500 text-white px-4 py-2 rounded"
+                onClick={confirmPurchase}
+              >
+                Ha
+              </button>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded"
+                onClick={() => setShowModal(false)}
+              >
+                Yo‘q
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
