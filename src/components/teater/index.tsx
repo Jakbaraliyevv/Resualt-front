@@ -11,8 +11,17 @@ function TeaterComponents() {
       <div className="bg-[#f2f2f5] py-7">
         <div className=" w-[90%] m-auto flex flex-col gap-[40px]">
           <div className="bg-[#FFF] p-7 rounded-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0_42px_33px_0_rgba(0,0,0,0.05),0_22px_18px_0_rgba(0,0,0,0.04),0_12px_10px_0_rgba(0,0,0,0.04),0_7px_5px_0_rgba(0,0,0,0.03),0_3px_2px_0_rgba(0,0,0,0.02)]">
-            <h1>Magic Cinema</h1>
-            <p>ул. Бабура, 174</p>
+            <h1 className="text-[19px] text-[#000] font-bold py-2">
+              Magic Cinema
+            </h1>
+            <a
+              className="text-[19px] font-normal text-[#30cbb5]"
+              href="https://yandex.uz/maps/10335/tashkent/?feedback=object%2Fadd&feedback-context=map.controls&ll=69.244953%2C41.304595&z=18"
+              target="_blank" // Bu atribut yangi tabda ochadi
+              rel="noopener noreferrer" // Xavfsizlikni ta'minlash uchun qo'shish
+            >
+              ул. Бабура, 174
+            </a>
           </div>
           <div className="">
             <div className="flex items-center gap-7">
