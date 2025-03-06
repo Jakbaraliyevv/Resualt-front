@@ -20,14 +20,14 @@ const Showcase = () => {
       <SwiperSlide>
         <img
           className="w-full object-cover"
-          src="https://kinoplan.io/uploads/banners/8211/2025/2/12/images/67acab633a00003f00415faf/desktop.jpg?1739369315"
+          src="https://kinoplan.io/uploads/banners/8211/2025/2/12/images/67acab8c3a0000ea00415fd2/desktop.jpg?1739369356"
           alt="Slide 2"
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           className="w-full object-cover"
-          src="https://kinoplan.io/uploads/banners/8211/2025/2/12/images/67acab8c3a0000ea00415fd2/desktop.jpg?1739369356"
+          src="https://kinoplan.io/uploads/banners/8211/2025/2/19/images/67b5999f3c0000890099556f/desktop.jpg?1739954592"
           alt="Slide 3"
         />
       </SwiperSlide>

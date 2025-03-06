@@ -2,6 +2,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 function LinksComponents() {
   const navigate = useNavigate();
+
+  const userData = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user") as string)
+    : null;
+
+  const token = localStorage.getItem("token");
+  console.log(userData, token);
   return (
     <section className="bg-[#FFF] py-4 shadow-[0px_5px_15px_rgba(0,0,0,0.1)]">
       <div className="w-[90%] m-auto flex items-center gap-9">
@@ -90,8 +97,9 @@ function LinksComponents() {
             onClick={() => navigate("/auth")}
             className="w-[110px] h-[29px] bg-[#00bfa5] rounded-[40px] text-[#FFF] text-[13px]"
           >
-            Войти
+            {token ? userData.first_name : "Войти"}
           </button>
+
           <button className="w-[160px] h-[34px] bg-[#00bfa5] rounded-[40px] text-[#FFF] text-[15px]">
             Написать отзыв
           </button>

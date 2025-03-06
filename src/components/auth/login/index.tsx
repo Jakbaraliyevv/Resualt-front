@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { LoadingOutlined } from "@ant-design/icons";
+import { LoginType } from "../../../types";
+import { useAxios } from "../../../hooks/axios";
+import { useNavigate } from "react-router-dom";
+import notificationApi from "../../../generic/notificition";
 
 function Login() {
   const [loading, setLoading] = useState(false);
@@ -8,14 +12,57 @@ function Login() {
   const labelStyle = "text-[17px] font-medium text-[#00bfa5]";
 
   // login start
-
+  const axios = useAxios();
+  const navigate = useNavigate();
+  const notify = notificationApi();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+  const getData = (e: React.FormEvent) => {
+    e.preventDefault();
 
+    const data: LoginType = {
+      email: email,
+      password: password,
+    };
+
+    console.log(data, "datatatta");
+    if (!email || !password) {
+      notify({ type: "full" });
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      notify({ type: "forma" });
+      return;
+    }
+    setLoading(true);
+
+    axios({
+      url: "/auth/sign-in",
+      method: "POST",
+      data,
+    })
+      .then((data) => {
+        console.log(data, "data");
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        notify({ type: "login" });
+        navigate("/");
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => {
+        console.log(error);
+        notify({ type: "notEmail2" });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <section className="w-full">
       <form className="w-[50%] p-7 flex flex-col gap-4">
@@ -54,6 +101,7 @@ function Login() {
         </div>
 
         <button
+          onClick={(e) => getData(e)}
           disabled={loading}
           className={`w-full bg-[#00bfa5] text-[#FFF] p-1.5 rounded-[6px] mt-4 
     transition-all duration-300 

@@ -20,3 +20,17 @@ export interface RegisterTYpe {
   email?: string;
   password?: string;
 }
+
+export interface Movie {
+  _id: string;
+  title: string;
+  year: number;
+  director: string;
+  genre: string[];
+  duration: number;
+  format: string;
+  price: number;
+  image: string;
+  ageRestriction: string;
+  availableTime: string;
+}
