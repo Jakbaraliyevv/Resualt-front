@@ -1,5 +1,5 @@
 function SeansComponents() {
-  return <div>Seans</div>;
+  return <section>seans</section>;
 }
 
 export default SeansComponents;
