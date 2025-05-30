@@ -62,3 +62,9 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Kengaytirilgan va kuchaytirilgan shadow effekti */
   border-radius: 11px; /* Oyoqni yumshatish uchun */
 }
+
+input,
+select,
+textarea {
+  outline: none;
+}

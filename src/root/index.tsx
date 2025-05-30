@@ -7,6 +7,7 @@ import Kino from "../pages/kino";
 import Contact from "../pages/contact";
 import AuthComponents from "../components/auth";
 import Verify from "../components/auth/verify";
+import Elon from "../components/elon";
 
 export const root = createBrowserRouter([
   {
@@ -37,4 +38,6 @@ export const root = createBrowserRouter([
   },
   { path: "/auth", element: <AuthComponents /> },
   { path: "/verify", element: <Verify /> },
+
+  { path: "/elon", element: <Elon /> },
 ]);
