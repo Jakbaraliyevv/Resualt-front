@@ -1,10 +1,11 @@
 import { Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css"; // CSS importi
+import { Swiper as SwiperType } from "swiper"; // ✅ Swiper tipini import qildik
+import "swiper/swiper-bundle.css";
 import { useState } from "react";
 
 const Img2 = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null); // ✅ Typing kiritildi
 
   return (
     <section className="w-[90%] m-auto">
@@ -17,11 +18,11 @@ const Img2 = () => {
 
         {/* Asosiy rasm uchun swiper */}
         <Swiper
-          spaceBetween={10} // Slaydlardagi bo'shliq
-          slidesPerView={1} // Har bir vaqtning o'zida bir rasm ko'rsatiladi
-          navigation // Navigatsiya uchun o'zo'zgartirishlar qo'shildi
-          thumbs={{ swiper: thumbsSwiper }} // Thumbs swiper bilan bog'lash
-          modules={[Navigation, Thumbs]} // Thumbs va Navigation modullarini qo'llash
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          thumbs={{ swiper: thumbsSwiper }}
+          modules={[Navigation, Thumbs]}
         >
           <SwiperSlide>
             <img
@@ -49,9 +50,9 @@ const Img2 = () => {
         {/* Pastdagi kichik rasm uchun swiper */}
         <div className="flex items-center justify-center w-[60%] m-auto mt-4">
           <Swiper
-            onSwiper={setThumbsSwiper} // Kichik rasm swiper'ini set qilish
-            spaceBetween={40} // Kichik rasmlar orasidagi masofa 40px
-            slidesPerView={3} // Pastdagi rasm kichkina bo'ladi
+            onSwiper={setThumbsSwiper}
+            spaceBetween={40}
+            slidesPerView={3}
             watchSlidesProgress
             modules={[Thumbs]}
             className="thumbs"
@@ -61,7 +62,7 @@ const Img2 = () => {
                 className="w-[80%] cursor-pointer"
                 src="https://kinoplan24.ru/uploads/hall_info/8211/hall_info/616546a34700005604a788ae/big-1634027249.jpg"
                 alt="Rasm 1"
-                onClick={() => thumbsSwiper && thumbsSwiper.swipeTo(0)} // Kichik rasmga bosilganda asosiy rasmni o'zgartirish
+                onClick={() => thumbsSwiper?.slideTo(0)} // ✅ to‘g‘ri method ishlatilmoqda
               />
             </SwiperSlide>
             <SwiperSlide>
@@ -69,7 +70,7 @@ const Img2 = () => {
                 className="w-[80%] cursor-pointer"
                 src="https://kinoplan24.ru/uploads/hall_info/8211/hall_info/616546a34700005604a788ae/big-1634027238.jpg"
                 alt="Rasm 2"
-                onClick={() => thumbsSwiper && thumbsSwiper.swipeTo(1)} // Kichik rasmga bosilganda asosiy rasmni o'zgartirish
+                onClick={() => thumbsSwiper?.slideTo(1)}
               />
             </SwiperSlide>
             <SwiperSlide>
@@ -77,11 +78,12 @@ const Img2 = () => {
                 className="w-[80%] cursor-pointer"
                 src="https://kinoplan24.ru/uploads/hall_info/8211/hall_info/61724e1d4b00001600318219/big-1634881053.jpg"
                 alt="Rasm 3"
-                onClick={() => thumbsSwiper && thumbsSwiper.swipeTo(2)} // Kichik rasmga bosilganda asosiy rasmni o'zgartirish
+                onClick={() => thumbsSwiper?.slideTo(2)}
               />
             </SwiperSlide>
           </Swiper>
         </div>
+
         <div className="flex flex-col gap-5 mt-[40px]">
           <h2 className="text-[22px] text-[#141414] font-medium">
             VIP зал №1 (Зал №1 VIP)

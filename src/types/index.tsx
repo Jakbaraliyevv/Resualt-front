@@ -33,4 +33,6 @@ export interface Movie {
   image: string;
   ageRestriction: string;
   availableTime: string;
+   availableDate: string; 
+count?: number
 }
