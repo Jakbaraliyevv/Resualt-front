@@ -14,14 +14,14 @@ function MovieCard2() {
     })
       .then((response) => {
         if (Array.isArray(response.data)) {
-          // Bugungi sanani olish
+          const allMovies = response.data as Movie[];
+
           const today = new Date();
-          today.setDate(today.getDate() + 1); // Ertangi sanani olish
+          today.setDate(today.getDate() + 1);
           const tomorrow = today.toISOString().split("T")[0];
 
-          // Faqat ertangi kun bo'lgan ma'lumotlarni olish
-          const filteredData = response.data.filter(
-            (movie) => movie.availableDate === tomorrow
+          const filteredData = allMovies.filter(
+            (movie: Movie) => movie.availableDate === tomorrow
           );
 
           setData(filteredData);
